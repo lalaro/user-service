@@ -1,11 +1,10 @@
 {
-  "name": "user_service",
+  "name": "user-service",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon app.js",
-    "test": "jest --detectOpenHandles --forceExit --coverage"
+    "start": "nodemon app.js"
   },
   "repository": {
     "type": "git",
@@ -19,34 +18,15 @@
     "url": "https://github.com/lalaro/user-service/issues"
   },
   "homepage": "https://github.com/lalaro/user-service#readme",
-  "engines": {
-    "node": ">=18.0.0 <21.0.0"
-  },
   "dependencies": {
-    "body-parser": "^2.2.0",
-    "cors": "^2.8.5",
+    "bcrypt": "^6.0.0",
     "dotenv": "^17.2.3",
-    "express": "^5.1.0",
-    "mongodb": "^6.19.0",
-    "mongoose": "^8.19.2"
+    "express": "^5.2.1",
+    "jsonwebtoken": "^9.0.3",
+    "mongodb": "^7.0.0",
+    "mongoose": "^9.0.1"
   },
   "devDependencies": {
-    "@shelf/jest-mongodb": "^5.2.2",
-    "jest": "^30.2.0",
-    "mongodb-memory-server": "^10.2.3",
-    "nodemon": "^3.1.10",
-    "supertest": "^7.1.4"
-  },
-  "jest": {
-    "collectCoverage": true,
-    "coverageDirectory": "coverage",
-    "coverageReporters": [
-      "lcov",
-      "text-summary"
-    ],
-    "testMatch": [
-      "**/tests/**/*.test.js"
-    ],
-    "testEnvironment": "node"
+    "nodemon": "^3.1.11"
   }
 }
