@@ -15,9 +15,14 @@ exports.buscarPorId = async (id) => {
   return await User.findById(id);
 };
 
-// Buscar usuario por correo (importante para login y registro)
-exports.buscarPorCorreo = async (correo) => {
-  return await User.findOne({ correo });
+// Buscar usuario por email (importante para login y registro)
+exports.buscarPoremail = async (email) => {
+  return await User.findOne({ email });
+};
+
+// Buscar usuario por username si lo necesitas
+exports.buscarPorUsername = async (username) => {
+  return await User.findOne({ username });
 };
 
 // Actualizar usuario

@@ -6,17 +6,17 @@ const JWT_SECRET = process.env.JWT_SECRET;
 // ====================
 //   LOGIN
 // ====================
-exports.login = async (correo, contraseña) => {
-  const user = await userRepository.buscarPorCorreo(correo);
+exports.login = async (email, password) => {
+  const user = await userRepository.buscarPoremail(email);
 
   if (!user) {
-    throw new Error("El correo no está registrado");
+    throw new Error("El email no está registrado");
   }
 
-  const match = await bcrypt.compare(contraseña, user.contraseña);
+  const match = await bcrypt.compare(password, user.password);
 
   if (!match) {
-    throw new Error("Contraseña incorrecta");
+    throw new Error("password incorrecta");
   }
 
   // Crear token con ID del usuario
@@ -32,21 +32,20 @@ exports.login = async (correo, contraseña) => {
 // ====================
 //   REGISTER
 // ====================
-exports.register = async (correo, contraseña, nombre, role = "user") => {
-  const userExist = await userRepository.buscarPorCorreo(correo);
+exports.register = async (data) => {
 
-  if (userExist) {
-    throw new Error("El correo ya está registrado");
-  }
+  // Validar email único
+  const userExist = await userRepository.buscarPoremail(data.email);
+  if (userExist) throw new Error("El email ya está registrado");
 
-  const hash = await bcrypt.hash(contraseña, 10);
+  // Encriptar password
+  const hash = await bcrypt.hash(data.password, 10);
 
-  const newUser = await userRepository.crear({
-    nombre,
-    correo,
-    contraseña: hash,
-    role,
-  });
+  // Reemplazar password por hash
+  data.password = hash;
+
+  // Crear usuario
+  const newUser = await userRepository.crear(data);
 
   return newUser;
 };
