@@ -1,20 +1,27 @@
-// src/models/User.js
 const mongoose = require("mongoose");
 
-const userSchema = new mongoose.Schema({
-  name: { type: String, required: true },           
-  email: { type: String, required: true, unique: true }, 
-  passwordHash: { type: String, required: false },
-  role: { type: String, default: "user" },
-  profile: { type: Object, default: null },
-  phoneNumber: { type: String, default: null },
-  healthStats: { type: [Object], default: [] },
-  notifications: { type: [Object], default: [] },
+const UserSchema = new mongoose.Schema({
+  documentType: { type: String, required: true },
+  documentNumber: { type: String, required: true },
+  firstName: { type: String, required: true },
+  lastName: { type: String, required: true },
+  username: { type: String, required: true, unique: true },
+  birthDate: { type: String, required: true },
+  gender: { type: String, required: true },
+  phone: { type: String, required: true },
+  address: { type: String, required: true },
 
-  picture: { type: String, default: null },
-  provider: { type: String, default: "local" }
+  email: { type: String, required: true, unique: true },
+  password: { type: String, required: true },
+
+  age: { type: String, required: true },
+  weight: { type: String, required: true },
+  height: { type: String, required: true },
+  workMode: { type: String, required: true },
+
+  role: { type: String, default: "user" },
+
+  profile: { type: String, default: null }
 }, { timestamps: true });
 
-const User = mongoose.model("User", userSchema);
-
-module.exports = User;
+module.exports = mongoose.model("User", UserSchema);
