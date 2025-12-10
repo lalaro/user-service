@@ -32,7 +32,7 @@ exports.login = async (correo, contraseña) => {
 // ====================
 //   REGISTER
 // ====================
-exports.register = async (nombre, correo, contraseña, role = "user") => {
+exports.register = async (correo, contraseña, nombre, role = "user") => {
   const userExist = await userRepository.buscarPorCorreo(correo);
 
   if (userExist) {
